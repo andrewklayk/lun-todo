@@ -125,21 +125,22 @@ class App extends React.Component {
               this.state.todos.filter(this.state.sorting==='all' ? todo=>todo : (this.state.sorting==='done' ? todo=>todo.isDone : todo=>!todo.isDone)).map(         //.filter(this.a ? todo=>!todo.isDone : todo=>todo.isDone)
                 (todo) => (  //індекс у якості key - погано, бо тоді при сортуванні поміняється співвідношення key з ел-том у всіх ел-тів, і реакт буде перерендерити ВСЕ
                   <li key = {todo.id}
-                  className = {todo.isDone ? "Todo-completed Todo" : "Todo"}> 
-                  <span
+                  className = {todo.isDone ? "Todo-completed Todo row" : "Todo row"}> 
+                  <span className="column column-left"
                     onClick = {
                       () => this.handleTodoClick(todo.id)
                     }
                   >
                     {todo.text}
                   </span>
-                  <button className="delete-button"
-                    onClick={
-                      () => this.handleTodoDelete(todo.id)
-                      }
-                    >
-                    Delete
-                  </button>
+                  <div className="column column-right">
+                    <button className="delete-button"
+                      onClick={
+                        () => this.handleTodoDelete(todo.id)
+                        }
+                      >
+                    </button>
+                  </div>
                 </li>                        //onClick = {function()} would CALL the function; onClick = {function} would pass it with no params
                 )                            // {() => F(param)} is equal to {this.F.bind(this, param)}
               )                              //{() => func(param)} - syntax for passing params to a function while passing the function to a component
@@ -149,7 +150,7 @@ class App extends React.Component {
           <div className="radios">
           <label>
             All
-            <input type="radio" name="sorting" value="all" onChange={this.handleSortingButtonChange}></input>
+            <input type="radio" name="sorting" value="all" checked={this.state.sorting==="all" ? true : false} onChange={this.handleSortingButtonChange}></input>
           </label>
           <label>
             Pending
@@ -159,7 +160,7 @@ class App extends React.Component {
             Done
             <input type="radio" name="sorting" value="done" onChange={this.handleSortingButtonChange}></input>
           </label>
-          {(this.state.todos.filter(todo=>!todo.isDone).length != 0 ? 
+          {(this.state.todos.filter(todo=>!todo.isDone).length !== 0 ? 
           <p>Only {this.state.todos.filter(todo=>!todo.isDone).length} left to do!</p> : <p>Everyhing seems done!</p>)}
           </div>
         </div>

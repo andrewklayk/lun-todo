@@ -164,7 +164,7 @@ class App extends React.Component {
             Done
             <input type="radio" name="sorting" value="done" onChange={this.handleSortingButtonChange}></input>
           </label>
-          <p>Count: {this.state.todos.filter(todo=>!todo.isDone).length} </p>
+          <p>Only {this.state.todos.filter(todo=>!todo.isDone).length} left to do!</p>
           </div>
         </div>
       </div>

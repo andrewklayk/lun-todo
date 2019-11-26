@@ -66,15 +66,10 @@ class App extends React.Component {
       isDone: !foundTodo.isDone
     };
 
-    const nextTodos = this.state.todos.filter(
-      todo => todo.id !== todoId
-    );
+    const finalNextTodos = this.state.todos.map(todo=>(todo.id === todoId ? nextTodo : todo));
 
     this.setState({
-      todos: [
-        ...nextTodos,
-        nextTodo
-      ]
+      todos: finalNextTodos
     })
   }
   
@@ -164,7 +159,8 @@ class App extends React.Component {
             Done
             <input type="radio" name="sorting" value="done" onChange={this.handleSortingButtonChange}></input>
           </label>
-          <p>Only {this.state.todos.filter(todo=>!todo.isDone).length} left to do!</p>
+          {(this.state.todos.filter(todo=>!todo.isDone).length != 0 ? 
+          <p>Only {this.state.todos.filter(todo=>!todo.isDone).length} left to do!</p> : <p>Everyhing seems done!</p>)}
           </div>
         </div>
       </div>

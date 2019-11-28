@@ -84,9 +84,12 @@
 }
 
 .todo-input {
-  width: 100%;
+  font-family: inherit;
   font-size: 20px;
+  width: 100%;
   text-align: center;
+  resize: vertical;
+  min-height: 22px;
 }
 
 .Todo {

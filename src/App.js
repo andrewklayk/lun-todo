@@ -30,25 +30,28 @@ class App extends React.Component {
   };
 
   handleSubmitButtonClick = () => {
-    const newTodo = {
-      text: this.state.newTodo,
-      isDone: false,
-      id: this.todoId
-    };
+    if(this.state.newTodo.trim() !== "")
+    {
+      const newTodo = {
+        text: this.state.newTodo,
+        isDone: false,
+        id: this.todoId
+      };
 
-    this.todoId++;
-    this.count++;
-    
-    this.inputRef.current.focus();
-
-    this.setState({
-      todos: [
-        ...this.state.todos,
-        newTodo
-      ],
+      this.todoId++;
+      this.count++;
       
-      newTodo: '',
-    });
+      this.inputRef.current.focus();
+
+      this.setState({
+        todos: [
+          ...this.state.todos,
+          newTodo
+        ],
+        
+        newTodo: '',
+      });
+    }
 
   };
   handleEnterPress = event => {
@@ -113,7 +116,7 @@ class App extends React.Component {
     return (
      <div className="App">
         <div className="main-content">
-          <input className="todo-input"
+          <textarea className="todo-input"
             ref = {this.inputRef}
             onChange={this.handleInputChange}
             value ={this.state.newTodo}
@@ -161,7 +164,7 @@ class App extends React.Component {
             <input type="radio" name="sorting" value="done" onChange={this.handleSortingButtonChange}></input>
           </label>
           {(this.state.todos.filter(todo=>!todo.isDone).length !== 0 ? 
-          <p>Only {this.state.todos.filter(todo=>!todo.isDone).length} left to do!</p> : <p>Everyhing seems done!</p>)}
+          <p>Only {this.state.todos.filter(todo=>!todo.isDone).length} left to do!</p> : <p>Everything seems done!</p>)}
           </div>
         </div>
       </div>
